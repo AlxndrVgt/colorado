@@ -1,0 +1,29 @@
+{
+  "name": "colorado",
+  "version": "0.1.0",
+  "description": "TypeScript color handling",
+  "main": "dist/Color.js",
+  "types": "dist/Color.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlxndrVgt/colorado.git"
+  },
+  "keywords": [
+    "color"
+  ],
+  "author": "Alexander Vogt <alexander.vogt@avolutions.de>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.6.2"
+  }
+}
