@@ -1,5 +1,5 @@
 {
-  "name": "avolutions/colorado",
+  "name": "@avolutions/colorado",
   "version": "0.1.0",
   "description": "TypeScript color handling",
   "main": "dist/Color.js",
