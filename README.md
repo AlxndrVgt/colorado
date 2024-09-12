@@ -12,4 +12,6 @@ npm install colorado
 
 ```js
 const color = new Color(255, 0, 0);
+color.toString(); // rgb(255, 0, 0)
+color.toArray(); // [255,0,0]
 ```

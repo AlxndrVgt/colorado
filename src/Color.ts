@@ -12,4 +12,12 @@ export class Color {
   private clampValue(value: number, min: number = 0, max: number = 255): number {
     return Math.max(min, Math.min(max, value));
   }
+
+  toString() {
+    return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+  }
+
+  toArray() {
+    return [this.red, this.green, this.blue];
+  }
 }

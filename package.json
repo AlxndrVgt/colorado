@@ -1,6 +1,6 @@
 {
   "name": "colorado",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "TypeScript color handling",
   "main": "dist/Color.js",
   "types": "dist/Color.d.ts",

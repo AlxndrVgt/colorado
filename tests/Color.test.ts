@@ -24,4 +24,16 @@ describe('Color class', () => {
     expect((color as any).green).toBe(255);
     expect((color as any).blue).toBe(255);
   });
+
+  it('toString() should return the correct rgb string', () => {
+    const color = new Color(72, 152, 38);
+
+    expect(color.toString()).toBe('rgb(72, 152, 38)');
+  });
+
+  it('toArray() should return the correct array representation', () => {
+    const color = new Color(168, 19, 78);
+
+    expect(color.toArray()).toEqual([168, 19, 78]);
+  });
 });
