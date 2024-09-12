@@ -13,8 +13,9 @@ npm install @avolutions/colorado
 
 ## Usage
 
+### Create new color object
 ```js
-const color = new Color(255, 0, 0);
-color.toString(); // 'rgb(255, 0, 0)'
-color.toArray(); // [255,0,0]
+const red = new Color(255, 0, 0); // From RGB
+const green = new Color('#00FF00'); // From hex code
+const blue = new Color('#00F'); // From hex 3-digit shorthand
 ```
