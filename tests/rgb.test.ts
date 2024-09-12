@@ -4,25 +4,37 @@ describe('Color class RGB mode', () => {
   it('should correctly assign values through the constructor', () => {
     const color = new Color(255, 100, 50);
 
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+
     expect((color as any).red).toBe(255);
     expect((color as any).green).toBe(100);
     expect((color as any).blue).toBe(50);
+    expect((color as any).hex).toBe(null);
   });
 
   it('should clamp values less than 0 to 0', () => {
     const color = new Color(-10, -50, -255);
 
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+
     expect((color as any).red).toBe(0);
     expect((color as any).green).toBe(0);
     expect((color as any).blue).toBe(0);
+    expect((color as any).hex).toBe(null);
   });
 
   it('should clamp values greater than 255 to 255', () => {
     const color = new Color(300, 500, 1000);
 
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+
     expect((color as any).red).toBe(255);
     expect((color as any).green).toBe(255);
     expect((color as any).blue).toBe(255);
+    expect((color as any).hex).toBe(null);
   });
 
   it('toString() should return the correct rgb string', () => {
@@ -35,5 +47,12 @@ describe('Color class RGB mode', () => {
     const color = new Color(168, 19, 78);
 
     expect(color.toArray()).toEqual([168, 19, 78]);
+  });
+
+  it('toObject() should return the correct object representation', () => {
+    const color = new Color(168, 19, 78);
+    const object = { red: 168, green: 19, blue: 78 };
+
+    expect(color.toObject()).toEqual(object);
   });
 });
