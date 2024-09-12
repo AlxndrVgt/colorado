@@ -1,13 +1,11 @@
-name: Tests
+name: Publish
 
 on:
   push:
-    branches: "*"
-  pull_request:
-    branches: "*"
+    branches: "main"
 
 jobs:
-  test:
+  publish:
 
     runs-on: ubuntu-latest
 
@@ -20,8 +18,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+    - name: Build the package
+      run: npm run build
 
-    - name: Run tests
-      run: npm test
+    - name: Publish to npm
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
