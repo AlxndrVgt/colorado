@@ -1,5 +1,5 @@
-import { InvalidConstructorArgumentsError } from './errors/InvalidConstructorArgumentsError';
-import { InvalidHexStringError } from './errors/InvalidHexStringError';
+import { InvalidConstructorArgumentsError } from './errors/InvalidConstructorArgumentsError.js';
+import { InvalidHexStringError } from './errors/InvalidHexStringError.js';
 
 export class Color {
   private red: number;

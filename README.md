@@ -13,7 +13,19 @@ npm install @avolutions/colorado
 
 ## Usage
 
-### Create new color object
+Colorado can be used with CommonJS and ES Modules.
+
+### CommonJS
+```js
+const { Color } = require('@avolutions/colorado');
+```
+
+### ES Modules
+```js
+import { Color } from '@avolutions/colorado';
+```
+
+### Create new color
 ```js
 const red = new Color(255, 0, 0); // From RGB
 const green = new Color('#00FF00'); // From hex code
