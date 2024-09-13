@@ -8,7 +8,7 @@ export default [
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
-      parser: typescriptParser, // Use the TypeScript parser here
+      parser: typescriptParser,
     },
   },
   js.configs.recommended,
