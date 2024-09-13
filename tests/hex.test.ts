@@ -1,65 +1,65 @@
-import { Color } from '../src/Color';
 import { InvalidHexStringError } from '../src/errors/InvalidHexStringError';
+import { HexColor } from '../src/HexColor';
+import { RgbColor } from '../src/RgbColor';
 
-describe('Color class HEX mode', () => {
+describe('HexColor class', () => {
   it('should correctly assign values through the constructor using', () => {
-    const color = new Color('#5c8a73');
-
-    expect(color.isHex()).toBe(true);
-    expect(color.isRgb()).toBe(false);
+    const color = new HexColor('#5c8a73');
 
     expect((color as any).hex).toBe('#5c8a73');
-    expect((color as any).red).toBe(null);
-    expect((color as any).green).toBe(null);
-    expect((color as any).blue).toBe(null);
   });
 
   it('should correctly assign values through the constructor using shorthand', () => {
-    const color = new Color('#03f');
-
-    expect(color.isHex()).toBe(true);
-    expect(color.isRgb()).toBe(false);
+    const color = new HexColor('#03f');
 
     expect((color as any).hex).toBe('#03f');
-    expect((color as any).red).toBe(null);
-    expect((color as any).green).toBe(null);
-    expect((color as any).blue).toBe(null);
   });
 
   it('should correctly handle upper- and lowercase characters in hex string', () => {
-    const uppercase = new Color('#ABCDEF');
-    const lowercase = new Color('#abcdef');
+    const uppercase = new HexColor('#ABCDEF');
+    const lowercase = new HexColor('#abcdef');
 
-    expect((uppercase as any).red).toBe((lowercase as any).red);
-    expect((uppercase as any).green).toBe((lowercase as any).green);
-    expect((uppercase as any).blue).toBe((lowercase as any).blue);
+    expect((uppercase as any).hex).toBe('#ABCDEF');
+    expect((lowercase as any).hex).toBe('#abcdef');
   });
 
   it("should throw an InvalidHexStringError for invalid hex string (length)", () => {
-    expect(() => new Color("#12345")).toThrow(InvalidHexStringError);
+    expect(() => new HexColor("#12345")).toThrow(InvalidHexStringError);
   });
 
-  // Test invalid hex string (non-hex characters)
   it("should throw an InvalidHexStringError for invalid hex string (non-hex characters)", () => {
-      expect(() => new Color("#ZZZZZZ")).toThrow(InvalidHexStringError);
+      expect(() => new HexColor("#ZZZZZZ")).toThrow(InvalidHexStringError);
   });
 
-  it('toString() should return the correct rgb string', () => {
-    const color = new Color('#acd46e');
+  it('should convert correctly to hex', () => {
+    const color = new HexColor('#62C718');
+    const hexColor = color.toHex();
 
-    expect(color.toString()).toBe('#acd46e');
+    expect(hexColor).toBeInstanceOf(HexColor);
+    expect(hexColor).toBe(color);
   });
 
-  it('toArray() should return the correct array representation', () => {
-    const color = new Color('#acd46e');
+  it('should convert correctly to rgb', () => {
+    const color3 = new HexColor('#2D7');
+    const rgbColor3 = color3.toRgb();
 
-    expect(color.toArray()).toEqual(['ac', 'd4', '6e']);
+    expect(rgbColor3).toBeInstanceOf(RgbColor);
+    expect((rgbColor3 as any).red).toBe(34);
+    expect((rgbColor3 as any).green).toBe(221);
+    expect((rgbColor3 as any).blue).toBe(119);
+
+    const color6 = new HexColor('#2D71D7');
+    const rgbColor6 = color6.toRgb();
+
+    expect(rgbColor6).toBeInstanceOf(RgbColor);
+    expect((rgbColor6 as any).red).toBe(45);
+    expect((rgbColor6 as any).green).toBe(113);
+    expect((rgbColor6 as any).blue).toBe(215);
   });
 
-  it('toObject() should return the correct object representation', () => {
-    const color = new Color('#acd46e');
-    const object = { red: 'ac', green: 'd4', blue: '6e' };
+  it('toString() should return the correct hex string', () => {
+    const color = new HexColor('#7D4118');
 
-    expect(color.toObject()).toEqual(object);
+    expect(color.toString()).toBe('#7D4118');
   });
 });
