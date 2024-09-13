@@ -1,19 +1,31 @@
 {
   "name": "@avolutions/colorado",
-  "version": "0.1.0",
-  "description": "TypeScript color handling",
-  "main": "dist/Color.js",
-  "types": "dist/Color.d.ts",
+  "version": "0.2.0",
+  "description": "Colorado is a lightweight, intuitive JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects. Perfect for developers looking for an easy and dynamic color management solution.",
+  "main": "dist/cjs/Color.js",
+  "module": "dist/esm/Color.js",
+  "types": "dist/esm/Color.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/Color.js",
+      "import": "./dist/esm/Color.js"
+    }
+  },
   "scripts": {
-    "build": "tsc",
+    "build:cjs": "tsc --project tsconfig.cjs.json && echo {\"type\": \"commonjs\"} > dist/cjs/package.json",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build": "npm run build:cjs && npm run build:esm",
+    "lint": "eslint",
+    "test:coverage": "jest --coverage",
     "test": "jest"
   },
+  "type": "module",
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlxndrVgt/colorado.git"
+    "url": "git+https://github.com/avolutions/colorado.git"
   },
   "keywords": [
     "color"
@@ -21,9 +33,15 @@
   "author": "Alexander Vogt <alexander.vogt@avolutions.de>",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
     "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.5.0"
   }
 }

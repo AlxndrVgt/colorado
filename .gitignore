@@ -3,3 +3,9 @@ node_modules/
 
 # Optional npm cache directory
 .npm
+
+# Build results
+dist/
+
+# Code coverage
+coverage/
