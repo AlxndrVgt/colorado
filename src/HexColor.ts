@@ -1,6 +1,6 @@
-import { InvalidHexStringError } from "./errors/InvalidHexStringError";
-import { IColor } from "./IColor";
-import { RgbColor } from "./RgbColor";
+import { InvalidHexStringError } from "./errors/InvalidHexStringError.js";
+import { IColor } from "./IColor.js";
+import { RgbColor } from "./RgbColor.js";
 
 /**
  * Class representing a Hexadecimal color.

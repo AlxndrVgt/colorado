@@ -1,5 +1,5 @@
-import { HexColor } from "./HexColor";
-import { IColor } from "./IColor";
+import { HexColor } from "./HexColor.js";
+import { IColor } from "./IColor.js";
 
 /**
  * Class representing an RGB color.
