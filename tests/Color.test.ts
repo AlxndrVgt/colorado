@@ -1,4 +1,5 @@
 import { Color } from '../src/Color';
+import { HtmlColors } from '../src/HtmlColors';
 import { InvalidConstructorArgumentsError } from '../src/errors/InvalidConstructorArgumentsError';
 import { HexColor } from '../src/HexColor';
 import { RgbColor } from '../src/RgbColor';
@@ -7,6 +8,11 @@ describe('Color class', () => {
   it("should throw an error when mixing hex string and RGB values", () => {
     expect(() => new Color("#00FFFF", 255, 255)).toThrow(InvalidConstructorArgumentsError);
   });
+
+  it("should throw an error providing invalid string", () => {
+    expect(() => new Color("foo")).toThrow(InvalidConstructorArgumentsError);
+  });
+
 
   it("should create a rgb color without alpha", () => {
     const color = new Color(255, 123, 12);
@@ -44,6 +50,34 @@ describe('Color class', () => {
     expect(color.isHex()).toBe(false);
   });
 
+  it("should create a hex color from HtmlColors", () => {
+    const color = new Color(HtmlColors.AliceBlue);
+
+    expect((color as any).color).toBeInstanceOf(HexColor);
+
+    expect(color.isRgb()).toBe(false);
+    expect(color.isHex()).toBe(true);
+  });
+
+  it("should create a hex color from html color name", () => {
+    const royalBlue = new Color("RoyalBlue");
+    const aqua = new Color(" aqua ");
+    const slateGray = new Color("sLaTeGrAy");
+
+    expect(() =>  new Color("unknown")).toThrow(InvalidConstructorArgumentsError);
+
+    expect((royalBlue as any).color).toBeInstanceOf(HexColor);
+    expect((aqua as any).color).toBeInstanceOf(HexColor);
+    expect((slateGray as any).color).toBeInstanceOf(HexColor);
+
+    expect(royalBlue.isRgb()).toBe(false);
+    expect(aqua.isRgb()).toBe(false);
+    expect(slateGray.isRgb()).toBe(false);
+    expect(royalBlue.isHex()).toBe(true);
+    expect(aqua.isHex()).toBe(true);
+    expect(slateGray.isHex()).toBe(true);
+  });
+
   it("should create a hex color without alpha", () => {
     const color = new Color('#ff0000');
 
@@ -71,7 +105,6 @@ describe('Color class', () => {
 
     expect(rgbColor).toBe(color);
   });
-
 
   it('should convert rgba to rgba', () => {
     const color = new Color(157, 54, 221, 0.6);

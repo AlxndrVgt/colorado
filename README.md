@@ -73,6 +73,21 @@ You can also create a Hex color with transparency by passing a 8-digit Hex code 
 const red = new Color('#FF0000CC'); // same as #ff0000
 ```
 
+#### Using HTML color name
+
+There are currently 140 predefined colors that all modern browsers support. A list of these colors can be found [here](https://www.w3schools.com/colors/colors_names.asp).
+
+To create a predefined color, you can either pass the name as a string or simply use the `HtmlColors` constant.
+
+```js
+import { Color, HtmlColors } from '@avolutions/colorado';
+
+const royalBlue = new Color(HtmlColors.RoyalBlue); // #4169E1
+const fireBrick = new Color('firebrick'); // #B22222
+```
+
+Colors created by color name or from `HtmlColors` constant are in Hex format by default, but can be converted to RGB anytime.
+
 ### Checking Color Format
 
 **Colorado** provides simple methods to check whether a color is in RGB or Hex format using the `isRgb()` and `isHex()` methods. These methods are useful when you need to validate the format of the color or ensure you're working with the right type before performing conversions or operations.

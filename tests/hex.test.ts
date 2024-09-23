@@ -1,4 +1,5 @@
 import { InvalidHexStringError } from '../src/errors/InvalidHexStringError';
+import { HtmlColors } from '../src/HtmlColors';
 import { HexColor } from '../src/HexColor';
 import { RgbColor } from '../src/RgbColor';
 
@@ -19,6 +20,12 @@ describe('HexColor class', () => {
     const color = new HexColor('#5c8a73cc');
 
     expect((color as any).hex).toBe('#5c8a73cc');
+  });
+
+  it('should correctly assign values through the constructor using HtmlColors', () => {
+    const color = new HexColor(HtmlColors.Khaki);
+
+    expect((color as any).hex).toBe('#F0E68CFF');
   });
 
   it('should correctly handle upper- and lowercase characters in hex string', () => {

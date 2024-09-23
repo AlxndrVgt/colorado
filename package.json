@@ -2,13 +2,13 @@
   "name": "@avolutions/colorado",
   "version": "0.2.0",
   "description": "Colorado is a lightweight, intuitive JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects. Perfect for developers looking for an easy and dynamic color management solution.",
-  "main": "dist/cjs/Color.js",
-  "module": "dist/esm/Color.js",
-  "types": "dist/esm/Color.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/cjs/Color.js",
-      "import": "./dist/esm/Color.js"
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
     }
   },
   "scripts": {

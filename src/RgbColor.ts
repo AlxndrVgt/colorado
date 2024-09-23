@@ -111,7 +111,7 @@ export class RgbColor implements IColor {
     const rgbRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
     const rgbaRegex = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d*\.?\d+)\s*\)$/;
 
-    let match = colorString.match(rgbRegex);
+    const match = colorString.match(rgbRegex);
     if(match) {
       return match;
     }
