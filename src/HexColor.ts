@@ -104,7 +104,7 @@ export class HexColor implements IColor {
     }
 
     if (hex.length === 6) {
-      hex = hex + '00';
+      hex = hex + 'FF';
     }
 
     return '#' + hex;

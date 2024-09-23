@@ -6,13 +6,13 @@ describe('HexColor class', () => {
   it('should correctly assign values through the constructor', () => {
     const color = new HexColor('#5c8a73');
 
-    expect((color as any).hex).toBe('#5c8a7300');
+    expect((color as any).hex).toBe('#5c8a73FF');
   });
 
   it('should correctly assign values through the constructor using shorthand', () => {
     const color = new HexColor('#03f');
 
-    expect((color as any).hex).toBe('#0033ff00');
+    expect((color as any).hex).toBe('#0033ffFF');
   });
 
   it('should correctly assign values through the constructor with alpha', () => {
@@ -27,6 +27,8 @@ describe('HexColor class', () => {
 
     expect((uppercase as any).hex).toBe('#ABCDEF00');
     expect((lowercase as any).hex).toBe('#abcdef00');
+    expect((uppercase as any).hex).toBe('#ABCDEFFF');
+    expect((lowercase as any).hex).toBe('#abcdefFF');
   });
 
   it("should throw an InvalidHexStringError for invalid hex string (length)", () => {
@@ -53,7 +55,7 @@ describe('HexColor class', () => {
     expect((rgbColor3 as any).red).toBe(34);
     expect((rgbColor3 as any).green).toBe(221);
     expect((rgbColor3 as any).blue).toBe(119);
-    expect((rgbColor3 as any).alpha).toBe(0);
+    expect((rgbColor3 as any).alpha).toBe(1);
 
     const color6 = new HexColor('#2D71D7');
     const rgbColor6 = color6.toRgb();
@@ -62,7 +64,7 @@ describe('HexColor class', () => {
     expect((rgbColor6 as any).red).toBe(45);
     expect((rgbColor6 as any).green).toBe(113);
     expect((rgbColor6 as any).blue).toBe(215);
-    expect((rgbColor6 as any).alpha).toBe(0);
+    expect((rgbColor6 as any).alpha).toBe(1);
 
     const color8 = new HexColor('#2D71D7CC');
     const rgbColor8 = color8.toRgb();

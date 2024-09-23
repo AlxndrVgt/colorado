@@ -136,6 +136,7 @@ const green = new Color('#00ff00').toRgb().toString(); // 'rgb(0, 255, 0)'
 If you pass `true` as a parameter to `toString()`, it will return a string in the format `rgba(r, g, b, a)`,  where `r`, `g` and `b` are the integer values for the red, green, and blue channels and `a` is the decimal value for alpha channel.
 
 ```js
+const red = new Color(255, 0, 0).toString(true); // 'rgba(255, 0, 0, 1)'
 const red = new Color(255, 0, 0, 0.75).toString(true); // 'rgba(255, 0, 0, 0.75)'
 ```
 
@@ -152,9 +153,9 @@ const green = new Color(0, 255, 0).toHex().toString(); // '#00FF00'
 By passing `true` as a parameter to `toString()` you will receive a 8-digit Hex string including the alpha channel.
 
 ```js
-const red = new Color('#FF0000').toString(); // '#FF000000'
+const red = new Color('#FF0000').toString(true); // '#FF0000FF'
 const red = new Color('#FF0000CC').toString(true); // '#FF0000CC'
-const green = new Color(0, 255, 0, 0.68).toHex().toString(); // '#00FF00AD'
+const green = new Color(0, 255, 0, 0.68).toHex().toString(true); // '#00FF00AD'
 ```
 
 ## License

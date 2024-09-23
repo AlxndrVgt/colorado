@@ -8,7 +8,7 @@ describe('RgbColor class', () => {
     expect((color as any).red).toBe(255);
     expect((color as any).green).toBe(100);
     expect((color as any).blue).toBe(50);
-    expect((color as any).alpha).toBe(0);
+    expect((color as any).alpha).toBe(1);
   });
 
   it('should correctly assign values through the constructor with alpha', () => {
@@ -59,7 +59,7 @@ describe('RgbColor class', () => {
     const hexColor = color.toHex();
 
     expect(hexColor).toBeInstanceOf(HexColor);
-    expect((hexColor as any).hex.toLowerCase()).toBe('#0A92CB00'.toLowerCase());
+    expect((hexColor as any).hex.toLowerCase()).toBe('#0A92CBFF'.toLowerCase());
   });
 
   it('should convert correctly to hex with alpha', () => {
