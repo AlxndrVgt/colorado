@@ -7,7 +7,7 @@
 
 ## About
 
-**Colorado** is a lightweight, intuitive JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects. Perfect for developers looking for an easy and dynamic color management solution.
+**Colorado** is a lightweight, intuitive and dependency free JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects.
 
 ## Installation
 
@@ -21,7 +21,7 @@ npm install @avolutions/colorado
 
 For **CommonJS**:
 ```js
-const Color = require('@avolutions/colorado');
+const { Color } = require('@avolutions/colorado');
 ```
 
 For **ES Modules**:
@@ -45,6 +45,19 @@ You can create a color by passing three integer values for the red, green, and b
 const red = new Color(255, 0, 0);
 ```
 
+You can also create a RGB color with transparency by passing a alpha value between 0 and 1 as optional fourth parameter.
+
+```js
+const red = new Color(255, 0, 0, 0.5);
+```
+
+It is also possible to create a color by passing a valid `rgb` or `rgba` string to the constructor.
+
+```js
+const red = new Color('rgb(255, 0, 0)');
+const blue = new Color('rgba(0, 255, 0, 0.5)');
+```
+
 #### Using a Hex code
 
 You can create a color by passing a 6-digit or 3-digit Hex code. It accepts both upper and lowercase letters.
@@ -53,6 +66,27 @@ You can create a color by passing a 6-digit or 3-digit Hex code. It accepts both
 const red = new Color('#FF0000'); // same as #ff0000
 const green = new Color('#0f0'); // same as #00ff00
 ```
+
+You can also create a Hex color with transparency by passing a 8-digit Hex code including alpha value.
+
+```js
+const red = new Color('#FF0000CC'); // same as #ff0000
+```
+
+#### Using HTML color name
+
+There are currently 140 predefined colors supported by all modern browsers. A list of these colors can be found [here](https://www.w3schools.com/colors/colors_names.asp).
+
+To create a predefined color, you can either pass the name as a string or simply use the `HtmlColors` constant.
+
+```js
+import { Color, HtmlColors } from '@avolutions/colorado';
+
+const royalBlue = new Color(HtmlColors.RoyalBlue); // #4169E1
+const fireBrick = new Color('firebrick'); // #B22222
+```
+
+Colors created by color name or from `HtmlColors` constant are in Hex format by default, but can be converted to RGB anytime.
 
 ### Checking Color Format
 
@@ -85,7 +119,8 @@ const green = new Color(0, 255, 0).isHex(); // false
 If you have a color in RGB format, you can use the `toHex()` method to convert it to a Hex color.
 
 ```js
-const red = new Color('255, 0, 0').toHex(); // #FF0000
+const red = new Color(255, 0, 0).toHex(); // #FF0000
+const green = new Color(0, 255, 0, 0.25).toHex(); // #00FF0040
 ```
 
 #### Converting Hex to RGB
@@ -95,6 +130,7 @@ Similarly, you can convert a Hex color to a RGB color using the `toRgb()` method
 ```js
 const red = new Color('#FF0000').toRgb(); // 255, 0, 0
 const green = new Color('#0f0').toRgb(); // 0, 255, 0
+const blue = new Color('#0000FF40').toRgb(); // 0, 0, 255, 0.25
 ```
 
 #### No Conversion Needed
@@ -119,13 +155,29 @@ const red = new Color(255, 0, 0).toString(); // 'rgb(255, 0, 0)'
 const green = new Color('#00ff00').toRgb().toString(); // 'rgb(0, 255, 0)'
 ```
 
-#### Hex Colors
-
-If the color is in Hex format, `toString()` will return the Hex code as a string, including the # symbol. The output will match the original format (6-digit or 3-digit, and either upper or lowercase).
+If you pass `true` as a parameter to `toString()`, it will return a string in the format `rgba(r, g, b, a)`,  where `r`, `g` and `b` are the integer values for the red, green, and blue channels and `a` is the decimal value for alpha channel.
 
 ```js
-const red = new Color('#FF0000').toString(); // '#FF0000'
+const red = new Color(255, 0, 0).toString(true); // 'rgba(255, 0, 0, 1)'
+const green = new Color(0, 255, 0, 0.75).toString(true); // 'rgba(0, 255, 0, 0.75)'
+```
+
+#### Hex Colors
+
+If the color is in Hex format, `toString()` will return the Hex code as a string, including the # symbol. The output will be in 6-digit and match the original case (upper- or lowercase).
+
+```js
+const red = new Color('#F00').toString(); // '#FF0000'
+const blue = new Color('#0000FF').toString(); // '#0000FF'
 const green = new Color(0, 255, 0).toHex().toString(); // '#00FF00'
+```
+
+By passing `true` as a parameter to `toString()` you will receive a 8-digit Hex string including the alpha channel.
+
+```js
+const red = new Color('#FF0000').toString(true); // '#FF0000FF'
+const green = new Color('#00FF00CC').toString(true); // '#00FF00CC'
+const blue = new Color(0, 0, 255, 0.68).toHex().toString(true); // '#0000FFAD'
 ```
 
 ## License

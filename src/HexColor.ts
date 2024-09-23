@@ -9,10 +9,10 @@ import { RgbColor } from "./RgbColor.js";
 export class HexColor implements IColor {
   /**
    * The hex color string, always in the format of a valid hex code.
-   * Example: '#FF5733' or '#F53'.
+   * Example: '#FF5733', '#F53' or #FF5733cc.
    * @type {string}
    */
-  public hex: string;
+  private hex: string;
 
   /**
    * Creates an instance of HexColor.
@@ -21,10 +21,10 @@ export class HexColor implements IColor {
    * @throws {InvalidHexStringError} If the provided hex string is invalid.
    */
   constructor(hex: string) {
-    if (!this.isValidHex(hex)) {
+    if (!HexColor.isValidHexString(hex)) {
       throw new InvalidHexStringError();
     }
-    this.hex = hex;
+    this.hex = this.convertTo8Digit(hex);
   }
 
   /**
@@ -33,19 +33,21 @@ export class HexColor implements IColor {
    * @returns {RgbColor} An instance of RgbColor representing the same color in RGB format.
    */
   toRgb(): RgbColor {
-    // Remove leading hashtag if present
-    let hex = this.hex.replace("#", "");
+    // Extract hex string without the "#" for parsing
+    const hex = this.hex.slice(1);
 
-    // Convert 3-digit hex to 6-digit hex if necessary
-    hex = this.convert3DigitTo6Digit(hex);
-
-    // Convert hex string to RGB values
+    // Convert hex string to integer
     const bigint = parseInt(hex, 16);
-    const red = (bigint >> 16) & 255;
-    const green = (bigint >> 8) & 255;
-    const blue = bigint & 255;
 
-    return new RgbColor(red, green, blue);
+    // Extract RGB values
+    const red = (bigint >> 24) & 255;
+    const green = (bigint >> 16) & 255;
+    const blue = (bigint >> 8 ) & 255;
+
+    // Extract alpha
+    const alpha = (bigint & 255) / 255;
+
+    return new RgbColor(red, green, blue, alpha);
   }
 
   /**
@@ -60,9 +62,16 @@ export class HexColor implements IColor {
   /**
    * Returns the hex color string.
    *
+   * @param {boolean} withAlpha - Wether to include alpha channel in output string or not.
+   *
    * @returns {string} The hex color string, e.g., '#FF5733'.
    */
-  toString(): string {
+  toString(withAlpha: boolean = false): string {
+    if(!withAlpha) {
+      // Return 6-digit hex
+      return this.hex.slice(0,7);
+    }
+
     return this.hex;
   }
 
@@ -72,25 +81,32 @@ export class HexColor implements IColor {
    * @param {string} hex - The hex color string to validate.
    * @returns {boolean} True if the hex string is valid, otherwise false.
    */
-  private isValidHex(hex: string): boolean {
-    // Regex to check if hex is 3 or 6 digits
-    const hexRegex = /^#([A-Fa-f0-9]{3}){1,2}$/;
+  public static isValidHexString(hex: string): boolean {
+    // Regex to check if hex is 3, 6, or 8 digits (with optional alpha channel)
+    const hexRegex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 
     return hexRegex.test(hex);
   }
 
   /**
-   * Converts a 3-digit hex string to a 6-digit hex string.
+   * Converts a 3-digit or 6-digit hex string to a 8-digit hex string including alpha.
    *
    * @param {string} hex - The 3-digit or 6-digit hex string.
-   * @returns {string} The expanded 6-digit hex string.
+   * @returns {string} The expanded 8-digit hex string.
    */
-  private convert3DigitTo6Digit(hex: string): string {
+  private convertTo8Digit(hex: string): string {
+    // Remove leading hashtag
+    hex = hex.slice(1);
+
     // If the hex string is 3 digits, expand to 6 digits
     if (hex.length === 3) {
       hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
     }
 
-    return hex;
+    if (hex.length === 6) {
+      hex = hex + 'FF';
+    }
+
+    return '#' + hex;
   }
 }
