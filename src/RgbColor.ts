@@ -25,17 +25,25 @@ export class RgbColor implements IColor {
   private blue: number;
 
   /**
+   * The alpha channel of the RGB color.
+   * @type {number}
+   */
+  private alpha: number;
+
+  /**
    * Creates an instance of RgbColor.
    *
    * @param {number} red - The red component (0-255).
    * @param {number} green - The green component (0-255).
    * @param {number} blue - The blue component (0-255).
+   * @param {number} alpha - The alpha channel (0-255).
    */
-  constructor(red: number, green: number, blue: number) {
+  constructor(red: number, green: number, blue: number, alpha: number = 0) {
     // Ensure RGB values are clamped between 0 and 255
     this.red = this.clampValue(red);
     this.green = this.clampValue(green);
     this.blue = this.clampValue(blue);
+    this.alpha = this.clampValue(alpha, 0, 1);
   }
 
   /**
@@ -54,7 +62,11 @@ export class RgbColor implements IColor {
    */
   toHex(): HexColor {
     // Convert RGB to Hex format
-    const hex = "#" + (1 << 24 | this.red << 16 | this.green << 8 | this.blue).toString(16).slice(1);
+    const hex = "#" +
+      (1 << 24 | this.red << 16 | this.green << 8 | this.blue).toString(16).slice(1) +
+      Math.round(this.alpha * 255).toString(16).padStart(2, '0'); // Convert alpha (0-1 scale) to 2-digit hex
+
+    console.log(hex);
 
     return new HexColor(hex);
   }
@@ -62,9 +74,14 @@ export class RgbColor implements IColor {
   /**
    * Returns the string representation of the RGB color.
    *
+   * @param {boolean} withAlpha - Wether to include alpha channel in output string or not.
+   *
    * @returns {string} The RGB color string, e.g., 'rgb(255, 0, 0)'.
    */
-  toString(): string {
+  toString(withAlpha: boolean = false): string {
+    if (withAlpha) {
+      return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
+    }
     return `rgb(${this.red}, ${this.green}, ${this.blue})`;
   }
 

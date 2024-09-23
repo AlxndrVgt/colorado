@@ -10,7 +10,7 @@ export class InvalidHexStringError extends Error {
    * The error message informs the user about the valid hex string formats.
    */
   constructor() {
-    super("Invalid hex string. Must be in the format '#RRGGBB' or '#RGB' and only containing valid values.");
+    super("Invalid hex string. Must be in the format '#RRGGBB', '#RGB' or '#RRGGBBAA' and only containing valid values.");
     this.name = "InvalidHexStringError";
   }
 }

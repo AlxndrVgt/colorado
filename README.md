@@ -45,6 +45,12 @@ You can create a color by passing three integer values for the red, green, and b
 const red = new Color(255, 0, 0);
 ```
 
+You can also create a RGB color with transparency by passing a alpha value between 0 and 1 as optional fourth parameter.
+
+```js
+const red = new Color(255, 0, 0, 0.5);
+```
+
 #### Using a Hex code
 
 You can create a color by passing a 6-digit or 3-digit Hex code. It accepts both upper and lowercase letters.
@@ -52,6 +58,12 @@ You can create a color by passing a 6-digit or 3-digit Hex code. It accepts both
 ```js
 const red = new Color('#FF0000'); // same as #ff0000
 const green = new Color('#0f0'); // same as #00ff00
+```
+
+You can also create a Hex color with transparency by passing a 8-digit Hex code including alpha value.
+
+```js
+const red = new Color('#FF0000CC'); // same as #ff0000
 ```
 
 ### Checking Color Format
@@ -85,7 +97,8 @@ const green = new Color(0, 255, 0).isHex(); // false
 If you have a color in RGB format, you can use the `toHex()` method to convert it to a Hex color.
 
 ```js
-const red = new Color('255, 0, 0').toHex(); // #FF0000
+const red = new Color(255, 0, 0).toHex(); // #FF0000
+const red = new Color(255, 0, 0, 0.25).toHex(); // #FF000040
 ```
 
 #### Converting Hex to RGB
@@ -95,6 +108,7 @@ Similarly, you can convert a Hex color to a RGB color using the `toRgb()` method
 ```js
 const red = new Color('#FF0000').toRgb(); // 255, 0, 0
 const green = new Color('#0f0').toRgb(); // 0, 255, 0
+const red = new Color('#FF000040').toRgb(); // 255, 0, 0, 0.25
 ```
 
 #### No Conversion Needed
@@ -119,13 +133,28 @@ const red = new Color(255, 0, 0).toString(); // 'rgb(255, 0, 0)'
 const green = new Color('#00ff00').toRgb().toString(); // 'rgb(0, 255, 0)'
 ```
 
-#### Hex Colors
-
-If the color is in Hex format, `toString()` will return the Hex code as a string, including the # symbol. The output will match the original format (6-digit or 3-digit, and either upper or lowercase).
+If you pass `true` as a parameter to `toString()`, it will return a string in the format `rgba(r, g, b, a)`,  where `r`, `g` and `b` are the integer values for the red, green, and blue channels and `a` is the decimal value for alpha channel.
 
 ```js
-const red = new Color('#FF0000').toString(); // '#FF0000'
+const red = new Color(255, 0, 0, 0.75).toString(true); // 'rgba(255, 0, 0, 0.75)'
+```
+
+#### Hex Colors
+
+If the color is in Hex format, `toString()` will return the Hex code as a string, including the # symbol. The output will be in 6-digit and match the original case (upper- or lowercase).
+
+```js
+const red = new Color('#F00').toString(); // '#FF0000'
+const blue = new Color('#0000FF').toString(); // '#0000FF'
 const green = new Color(0, 255, 0).toHex().toString(); // '#00FF00'
+```
+
+By passing `true` as a parameter to `toString()` you will receive a 8-digit Hex string including the alpha channel.
+
+```js
+const red = new Color('#FF0000').toString(); // '#FF000000'
+const red = new Color('#FF0000CC').toString(true); // '#FF0000CC'
+const green = new Color(0, 255, 0, 0.68).toHex().toString(); // '#00FF00AD'
 ```
 
 ## License

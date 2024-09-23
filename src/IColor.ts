@@ -19,7 +19,9 @@ export interface IColor {
   /**
    * Returns the string representation of the color.
    *
+   * @param {boolean} withAlpha - Wether to include alpha channel in output string or not.
+   *
    * @returns {string} The string representation of the color, typically in Hex or RGB format.
    */
-  toString(): string;
+  toString(withAlpha: boolean): string;
 }

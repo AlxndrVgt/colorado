@@ -8,18 +8,35 @@ describe('Color class', () => {
     expect(() => new Color("#00FFFF", 255, 255)).toThrow(InvalidConstructorArgumentsError);
   });
 
-  it("should create a rgb color", () => {
+  it("should create a rgb color without alpha", () => {
     const color = new Color(255, 123, 12);
 
     expect((color as any).color).toBeInstanceOf(RgbColor);
 
     expect(color.isRgb()).toBe(true);
     expect(color.isHex()).toBe(false);
-
   });
 
-  it("should create a hex color", () => {
+  it("should create a rgb color with alpha", () => {
+    const color = new Color(255, 123, 12, 0.5);
+
+    expect((color as any).color).toBeInstanceOf(RgbColor);
+
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+  });
+
+  it("should create a hex color without alpha", () => {
     const color = new Color('#ff0000');
+
+    expect((color as any).color).toBeInstanceOf(HexColor);
+
+    expect(color.isRgb()).toBe(false);
+    expect(color.isHex()).toBe(true);
+  });
+
+  it("should create a hex color with alpha", () => {
+    const color = new Color('#ff0000cc');
 
     expect((color as any).color).toBeInstanceOf(HexColor);
 
@@ -37,8 +54,19 @@ describe('Color class', () => {
     expect(rgbColor).toBe(color);
   });
 
-  it('should convert rgb to hex', () => {
-    const color = new Color(157, 54, 221);
+
+  it('should convert rgba to rgba', () => {
+    const color = new Color(157, 54, 221, 0.6);
+    const rgbColor = color.toRgb();
+
+    expect(rgbColor.isRgb()).toBe(true);
+    expect(rgbColor.isHex()).toBe(false);
+
+    expect(rgbColor).toBe(color);
+  });
+
+  it('should convert rgba to hex', () => {
+    const color = new Color(157, 54, 221, 0.1);
     const hexColor = color.toHex();
 
     expect(hexColor.isHex()).toBe(true);
@@ -55,8 +83,26 @@ describe('Color class', () => {
     expect(hexColor).toBe(color);
   });
 
+  it('should convert hex with alpha to hex with alpha', () => {
+    const color = new Color('#969243ed');
+    const hexColor = color.toHex();
+
+    expect(hexColor.isHex()).toBe(true);
+    expect(hexColor.isRgb()).toBe(false);
+
+    expect(hexColor).toBe(color);
+  });
+
   it('should convert hex to rgb', () => {
     const color = new Color('#969243');
+    const rgbColor = color.toRgb();
+
+    expect(rgbColor.isRgb()).toBe(true);
+    expect(rgbColor.isHex()).toBe(false);
+  });
+
+  it('should convert hex with alpha to rgb with alpha', () => {
+    const color = new Color('#969243cc');
     const rgbColor = color.toRgb();
 
     expect(rgbColor.isRgb()).toBe(true);
