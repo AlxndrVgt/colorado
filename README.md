@@ -7,7 +7,7 @@
 
 ## About
 
-**Colorado** is a lightweight, intuitive JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects. Perfect for developers looking for an easy and dynamic color management solution.
+**Colorado** is a lightweight, intuitive and dependency free JavaScript library for handling and converting color values. Seamlessly switch between RGB and Hex formats with simple methods and generate clean string outputs for your web projects.
 
 ## Installation
 
@@ -21,7 +21,7 @@ npm install @avolutions/colorado
 
 For **CommonJS**:
 ```js
-const Color = require('@avolutions/colorado');
+const { Color } = require('@avolutions/colorado');
 ```
 
 For **ES Modules**:
@@ -75,7 +75,7 @@ const red = new Color('#FF0000CC'); // same as #ff0000
 
 #### Using HTML color name
 
-There are currently 140 predefined colors that all modern browsers support. A list of these colors can be found [here](https://www.w3schools.com/colors/colors_names.asp).
+There are currently 140 predefined colors supported by all modern browsers. A list of these colors can be found [here](https://www.w3schools.com/colors/colors_names.asp).
 
 To create a predefined color, you can either pass the name as a string or simply use the `HtmlColors` constant.
 
