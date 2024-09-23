@@ -25,10 +25,22 @@ describe('HexColor class', () => {
     const uppercase = new HexColor('#ABCDEF');
     const lowercase = new HexColor('#abcdef');
 
-    expect((uppercase as any).hex).toBe('#ABCDEF00');
-    expect((lowercase as any).hex).toBe('#abcdef00');
     expect((uppercase as any).hex).toBe('#ABCDEFFF');
     expect((lowercase as any).hex).toBe('#abcdefFF');
+  });
+
+  it("should detect hex strings correctly", () => {
+    expect(HexColor.isValidHexString('#123')).toBe(true);
+    expect(HexColor.isValidHexString('#123456')).toBe(true);
+    expect(HexColor.isValidHexString('#12345678')).toBe(true);
+
+    expect(HexColor.isValidHexString('123')).toBe(false);
+    expect(HexColor.isValidHexString('#12')).toBe(false);
+    expect(HexColor.isValidHexString('#1234')).toBe(false);
+    expect(HexColor.isValidHexString('#12345')).toBe(false);
+    expect(HexColor.isValidHexString('#1234567')).toBe(false);
+    expect(HexColor.isValidHexString('#123456789')).toBe(false);
+    expect(HexColor.isValidHexString('#ZZZ')).toBe(false);
   });
 
   it("should throw an InvalidHexStringError for invalid hex string (length)", () => {

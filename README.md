@@ -51,6 +51,13 @@ You can also create a RGB color with transparency by passing a alpha value betwe
 const red = new Color(255, 0, 0, 0.5);
 ```
 
+It is also possible to create a color by passing a valid `rgb` or `rgba` string to the constructor.
+
+```js
+const red = new Color('rgb(255, 0, 0)');
+const blue = new Color('rgba(0, 255, 0, 0.5)');
+```
+
 #### Using a Hex code
 
 You can create a color by passing a 6-digit or 3-digit Hex code. It accepts both upper and lowercase letters.

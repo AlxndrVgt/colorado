@@ -95,4 +95,27 @@ export class RgbColor implements IColor {
     // Clamp the value between the min and max range
     return Math.max(min, Math.min(max, value));
   }
+
+  /**
+   * Validates whether the provided color string is in a valid `rgb()` or `rgba()` format.
+   *
+   * If the string is a valid `rgb()` or `rgba()` string, it returns the match array
+   * containing the captured values. If the string is invalid, it returns `null`.
+   *
+   * @param {string} colorString - The color string to be validated (e.g., `'rgb(255, 255, 255)'`, `'rgba(255, 255, 255, 0.5)'`).
+   * @returns {RegExpMatchArray | null} - The match array if the string is valid, or `null` if the string is invalid.
+   *
+   */
+  public static isValidRgbString(colorString: string): RegExpMatchArray | null {
+    // Regex pattern for matching 'rgb()' or 'rgba()' with or without spaces
+    const rgbRegex = /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
+    const rgbaRegex = /^rgba\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d*\.?\d+)\s*\)$/;
+
+    let match = colorString.match(rgbRegex);
+    if(match) {
+      return match;
+    }
+
+    return colorString.match(rgbaRegex);
+  }
 }

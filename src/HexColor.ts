@@ -21,7 +21,7 @@ export class HexColor implements IColor {
    * @throws {InvalidHexStringError} If the provided hex string is invalid.
    */
   constructor(hex: string) {
-    if (!this.isValidHex(hex)) {
+    if (!HexColor.isValidHexString(hex)) {
       throw new InvalidHexStringError();
     }
     this.hex = this.convertTo8Digit(hex);
@@ -81,7 +81,7 @@ export class HexColor implements IColor {
    * @param {string} hex - The hex color string to validate.
    * @returns {boolean} True if the hex string is valid, otherwise false.
    */
-  private isValidHex(hex: string): boolean {
+  public static isValidHexString(hex: string): boolean {
     // Regex to check if hex is 3, 6, or 8 digits (with optional alpha channel)
     const hexRegex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/;
 

@@ -26,6 +26,24 @@ describe('Color class', () => {
     expect(color.isHex()).toBe(false);
   });
 
+  it("should create a rgb color from string without alpha", () => {
+    const color = new Color('rgb(255, 123,12)');
+
+    expect((color as any).color).toBeInstanceOf(RgbColor);
+
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+  });
+
+  it("should create a rgb color from string with alpha", () => {
+    const color = new Color('rgba(255,123, 12, 0.5)');
+
+    expect((color as any).color).toBeInstanceOf(RgbColor);
+
+    expect(color.isRgb()).toBe(true);
+    expect(color.isHex()).toBe(false);
+  });
+
   it("should create a hex color without alpha", () => {
     const color = new Color('#ff0000');
 

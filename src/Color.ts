@@ -30,8 +30,25 @@ export class Color implements IColor {
       // RGB values provided
       this.color = new RgbColor(arg1, arg2, arg3, arg4);
     } else if (typeof arg1 === "string" && arg2 === undefined && arg3 === undefined) {
-      // Hex value provided
-      this.color = new HexColor(arg1);
+      if(HexColor.isValidHexString(arg1)) {
+        // Hex value provided
+        this.color = new HexColor(arg1);
+      } else {
+        const rgbMatch = RgbColor.isValidRgbString(arg1);
+
+        if(rgbMatch) {
+          // RGB string provided
+          const red = parseInt(rgbMatch[1], 10);
+          const green = parseInt(rgbMatch[2], 10);
+          const blue = parseInt(rgbMatch[3], 10);
+          const alpha = rgbMatch[4] !== undefined ? parseFloat(rgbMatch[4]) : 1;
+
+          this.color = new RgbColor(red, green, blue, alpha);
+        } else {
+          // Invalid constructor arguments
+          throw new InvalidConstructorArgumentsError();
+        }
+      }
     } else {
       // Invalid constructor arguments
       throw new InvalidConstructorArgumentsError();
