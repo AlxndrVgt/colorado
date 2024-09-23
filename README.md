@@ -120,7 +120,7 @@ If you have a color in RGB format, you can use the `toHex()` method to convert i
 
 ```js
 const red = new Color(255, 0, 0).toHex(); // #FF0000
-const red = new Color(255, 0, 0, 0.25).toHex(); // #FF000040
+const green = new Color(0, 255, 0, 0.25).toHex(); // #00FF0040
 ```
 
 #### Converting Hex to RGB
@@ -130,7 +130,7 @@ Similarly, you can convert a Hex color to a RGB color using the `toRgb()` method
 ```js
 const red = new Color('#FF0000').toRgb(); // 255, 0, 0
 const green = new Color('#0f0').toRgb(); // 0, 255, 0
-const red = new Color('#FF000040').toRgb(); // 255, 0, 0, 0.25
+const blue = new Color('#0000FF40').toRgb(); // 0, 0, 255, 0.25
 ```
 
 #### No Conversion Needed
@@ -159,7 +159,7 @@ If you pass `true` as a parameter to `toString()`, it will return a string in th
 
 ```js
 const red = new Color(255, 0, 0).toString(true); // 'rgba(255, 0, 0, 1)'
-const red = new Color(255, 0, 0, 0.75).toString(true); // 'rgba(255, 0, 0, 0.75)'
+const green = new Color(0, 255, 0, 0.75).toString(true); // 'rgba(0, 255, 0, 0.75)'
 ```
 
 #### Hex Colors
@@ -176,8 +176,8 @@ By passing `true` as a parameter to `toString()` you will receive a 8-digit Hex 
 
 ```js
 const red = new Color('#FF0000').toString(true); // '#FF0000FF'
-const red = new Color('#FF0000CC').toString(true); // '#FF0000CC'
-const green = new Color(0, 255, 0, 0.68).toHex().toString(true); // '#00FF00AD'
+const green = new Color('#00FF00CC').toString(true); // '#00FF00CC'
+const blue = new Color(0, 0, 255, 0.68).toHex().toString(true); // '#0000FFAD'
 ```
 
 ## License
